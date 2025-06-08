@@ -30,6 +30,15 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // ваш фронт
+    credentials: true,
+  })
+);
+
 app.post("/register", async (req, res) => {
   try {
     const { user, token } = await register(req.body.login, req.body.password);
